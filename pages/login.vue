@@ -1,15 +1,13 @@
 <template>
   <v-row justify="center" align="center">
     <v-col class="text-center">
-      <form @submit.prevent>
+      <form @submit.prevent="submitLogin">
         <h1>Login</h1>
         <label for="username" class="text-left">Username</label>
         <input v-model="user.username" id="username" type="text" />
         <label for="password" class="text-left">Password</label>
         <input v-model="user.password" id="password" type="password" />
-        <v-btn color="primary" nuxt to="/api/v1/login/access-token">
-          Login
-        </v-btn>
+        <v-btn type="submit" color="primary"> Login </v-btn>
         <v-spacer />
       </form>
     </v-col>
@@ -28,35 +26,39 @@ export default {
     };
   },
 
-  // check loggedin
   methods: {
-    loginUser() {
-      this.$auth.loginWith('local', {
-        data: this.user,
-      });
+    /**
+     * Login
+     */
+    async submitLogin() {
+      console.debug('entire submitLogin()');
+      const target_url = 'http://127.0.0.1:8000/api/v1/login/access-token';
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      };
+
+      // concreates request payloads as a url encodd form input.
+      const urlEncodedFormInput = new URLSearchParams();
+      urlEncodedFormInput.append('username', this.user.username);
+      urlEncodedFormInput.append('password', this.user.password);
+      // post the auth request to the backend api
+      console.debug('postit');
+      await this.$axios
+        .$post(target_url, urlEncodedFormInput, config)
+        .then((response) => {
+          console.debug(`${response.data.text}`);
+          this.$auth.loginWith('local', {
+            data: this.user,
+          });
+        })
+        .catch((err) => {
+          console.error(`${err}`);
+        });
+      console.debug('posted');
     },
   },
-
-  // methods: {
-  //   async login() {
-  //     try {
-  //       await this.$auth.loginWith('local', {
-  //         data: {
-  //           auth: {
-  //             username: this.username,
-  //             password: this.password,
-  //           },
-  //         },
-  //       });
-  //       if (!this.$auth.loggedIn) {
-  //         throw Error('You Must Login.');
-  //       }
-  //       this.$router.push('/');
-  //     } catch (e) {
-  //       alert(`Login Failed.`);
-  //     }
-  //   },
-  // },
 };
 </script>
 

@@ -59,24 +59,20 @@ export default {
         tokenType: 'bearer',
         endpoints: {
           login: {
-            url: 'http://127.0.0.1:8000/api/v1/login/access-token', // 認証先APIのURL
+            url: '/api/v1/login/access-token', // 認証先APIのURL
             method: 'post',
             propertyName: 'access_token', // サーバから返されるToken
           },
           logout: false,
-          user: { url: 'http://127.0.0.1:8000/api/v1/auth/users/me/', method: 'get' },
+          user: { url: '/api/v1/auth/users/me/', method: 'get' },
         },
-        // refreshToken: {
-        //   property: 'refresh_token',
-        //   data: 'refresh_token',
-        //   maxAge: 60 * 60 * 24 * 30
-        // },
       },
     },
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
+    baseURL: 'http://127.0.0.1:8000'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
