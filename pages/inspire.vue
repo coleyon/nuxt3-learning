@@ -7,3 +7,10 @@
     </v-col>
   </v-row>
 </template>
+
+<script>
+export default {
+  // Login required
+  middleware: ['auth'],
+};
+</script>

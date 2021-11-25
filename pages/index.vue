@@ -6,44 +6,43 @@
         <!-- <VuetifyLogo /> -->
       </v-card>
       <v-card>
-        <v-card-title class="headline">
-          Vuetify + Nuxt.js App Sample.
-        </v-card-title>
+        <v-card-title class="headline"> Home </v-card-title>
         <v-card-text>
-          <p>P Tag Text example....</p>
+          <p>自動処理の指示とステータス確認ツール</p>
           <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-            >
-              documentation
-            </a>.
+            For more information on Vuetify, check out the
+            <a href="https://vuetifyjs.com" target="_blank"> documentation </a>.
           </p>
           <p>
-            If you have questions, please join the official <a
+            If you have questions, please join the official
+            <a
               href="https://chat.vuetifyjs.com/"
               target="_blank"
               rel="noopener noreferrer"
               title="chat"
             >
-              discord
-            </a>.
+              discord </a
+            >.
           </p>
           <p>
-            Find a bug? Report it on the github <a
+            Find a bug? Report it on the github
+            <a
               href="https://github.com/vuetifyjs/vuetify/issues"
               target="_blank"
               rel="noopener noreferrer"
               title="contribute"
             >
-              issue board
-            </a>.
+              issue board </a
+            >.
           </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
+          <p>
+            Thank you for developing with Vuetify and I look forward to bringing
+            more exciting features in the future.
+          </p>
           <div class="text-xs-right">
             <em><small>&mdash; John Leider</small></em>
           </div>
-          <hr class="my-3">
+          <hr class="my-3" />
           <a
             href="https://nuxtjs.org/"
             target="_blank"
@@ -51,7 +50,7 @@
           >
             Nuxt Documentation
           </a>
-          <br>
+          <br />
           <a
             href="https://github.com/nuxt/nuxt.js"
             target="_blank"
@@ -62,24 +61,20 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
+          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
 
-          <v-btn
-            color="secondary"
-            nuxt
-            to="/"
-          >
-            Cancel
-          </v-btn>
-
+          <v-btn color="secondary" nuxt to="/"> Cancel </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
   </v-row>
 </template>
+
+<script>
+export default {
+  // Login required
+  middleware: ['auth'],
+};
+</script>
+
+<style scoped></style>

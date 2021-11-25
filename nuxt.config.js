@@ -41,11 +41,43 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+  auth: {
+    redirect:{
+      login: '/login',
+      callback: '/login',
+      home: '/'
+    },
+    localStorage: false,
+
+    // 認証ロジック
+    strategies: {
+      // JWT auth with the demostack backend.
+      local: {
+        tokenType: 'bearer',
+        endpoints: {
+          login: {
+            url: 'http://127.0.0.1:8000/api/v1/login/access-token', // 認証先APIのURL
+            method: 'post',
+            propertyName: 'access_token', // サーバから返されるToken
+          },
+          logout: false,
+          user: { url: 'http://127.0.0.1:8000/api/v1/auth/users/me/', method: 'get' },
+        },
+        // refreshToken: {
+        //   property: 'refresh_token',
+        //   data: 'refresh_token',
+        //   maxAge: 60 * 60 * 24 * 30
+        // },
+      },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

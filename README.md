@@ -46,7 +46,6 @@ Layouts are a great help when you want to change the look and feel of your Nuxt 
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
 
-
 ### `pages`
 
 This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
@@ -72,3 +71,12 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+# origin
+
+- nuxtjs/auth-next: https://auth.nuxtjs.org/guide/setup/
+
+# references
+
+- How to Nuxt.js + Typescript: https://typescript.nuxtjs.org/ja/
+- How to auth with JWT using nuxtjs/auth-next: https://zenn.dev/tanoken729/articles/73a3489dff27f4
