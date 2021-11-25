@@ -71,7 +71,7 @@
           </v-btn>
 
           <v-btn
-            color="blue-grey darken-1"
+            color="secondary"
             nuxt
             to="/"
           >
