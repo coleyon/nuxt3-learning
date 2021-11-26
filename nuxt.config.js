@@ -56,15 +56,21 @@ export default {
     strategies: {
       // JWT auth with the demostack backend.
       local: {
-        tokenType: 'bearer',
+        tokenType: 'Bearer',
+        tokenRequired: true,
+        token:{
+          type: 'Bearer',
+          property: 'access_token',
+        },
         endpoints: {
           login: {
-            url: '/api/v1/login/access-token', // 認証先APIのURL
+            url: '/login/access-token', // 認証先APIのURL
             method: 'post',
             propertyName: 'access_token', // サーバから返されるToken
           },
           logout: false,
-          user: { url: '/api/v1/auth/users/me/', method: 'get' },
+          // user: { url: '/users/me', method: 'get', propertyName: 'full_name' },
+          user: false,
         },
       },
     },
@@ -72,7 +78,14 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: 'http://127.0.0.1:8000'
+    baseURL: 'http://127.0.0.1:8000',
+    prefix: '/api/v1',
+    proxy: true,
+  },
+
+  // prevent CORS restriction
+  proxy: {
+    '/api/v1': 'http://127.0.0.1:8000'
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

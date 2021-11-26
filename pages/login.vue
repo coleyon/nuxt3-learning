@@ -32,7 +32,7 @@ export default {
      */
     async submitLogin() {
       console.debug('entire submitLogin()');
-      const target_url = 'http://127.0.0.1:8000/api/v1/login/access-token';
+      const target_url = '/login/access-token';
       const config = {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,19 +44,37 @@ export default {
       urlEncodedFormInput.append('username', this.user.username);
       urlEncodedFormInput.append('password', this.user.password);
       // post the auth request to the backend api
-      console.debug('postit');
-      await this.$axios
-        .$post(target_url, urlEncodedFormInput, config)
-        .then((response) => {
-          console.debug(`${response.data.text}`);
-          this.$auth.loginWith('local', {
-            data: this.user,
-          });
-        })
-        .catch((err) => {
-          console.error(`${err}`);
+      console.debug('Posting...');
+      try {
+        // const result = await this.$axios.post(
+        //   target_url,
+        //   urlEncodedFormInput,
+        //   config
+        // );
+        // console.debug('Responsed token is:', result.data);
+        const loginResult = await this.$auth.loginWith('local', {
+          data: urlEncodedFormInput,
         });
-      console.debug('posted');
+        console.debug('LoginWithResult', loginResult);
+        console.debug('Posted!');
+        this.$router.push('/');
+      } catch (err) {
+        console.error(err);
+      }
+      console.debug('Moved!');
+      // await this.$axios
+      //   .$post(target_url, urlEncodedFormInput, config)
+      //   .then((result) => {
+      //     console.debug('Response is:', result.data);
+      //     await this.$auth.loginWith('local', {
+      //       data: this.user,
+      //     });
+      //     console.debug(`Is Logged in: ${this.$auth.loggedIn}`);
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //   });
+      // console.debug('Posted');
     },
   },
 };
