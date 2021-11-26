@@ -32,49 +32,26 @@ export default {
      */
     async submitLogin() {
       console.debug('entire submitLogin()');
-      const target_url = '/login/access-token';
-      const config = {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      };
-
-      // concreates request payloads as a url encodd form input.
-      const urlEncodedFormInput = new URLSearchParams();
-      urlEncodedFormInput.append('username', this.user.username);
-      urlEncodedFormInput.append('password', this.user.password);
       // post the auth request to the backend api
-      console.debug('Posting...');
       try {
-        // const result = await this.$axios.post(
-        //   target_url,
-        //   urlEncodedFormInput,
-        //   config
-        // );
-        // console.debug('Responsed token is:', result.data);
-        const loginResult = await this.$auth.loginWith('local', {
+        // concreates request payloads as a url encodd form input.
+        const urlEncodedFormInput = new URLSearchParams();
+        urlEncodedFormInput.append('username', this.user.username);
+        urlEncodedFormInput.append('password', this.user.password);
+        await this.$auth.loginWith('local', {
           data: urlEncodedFormInput,
         });
-        console.debug('LoginWithResult', loginResult);
-        console.debug('Posted!');
+        const result = await this.$axios.get('/users/me');
+        console.debug('Responsed token is:', result.data);
+        await this.$auth.setUser(result.data.email);
+        // console.debug('loggedin? ', this.$auth.loggedIn);
+        // console.debug('logging out.... ');
+        // await this.$auth.logout();
+        // console.debug('loggedin? ', this.$auth.loggedIn);
         this.$router.push('/');
       } catch (err) {
         console.error(err);
       }
-      console.debug('Moved!');
-      // await this.$axios
-      //   .$post(target_url, urlEncodedFormInput, config)
-      //   .then((result) => {
-      //     console.debug('Response is:', result.data);
-      //     await this.$auth.loginWith('local', {
-      //       data: this.user,
-      //     });
-      //     console.debug(`Is Logged in: ${this.$auth.loggedIn}`);
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
-      // console.debug('Posted');
     },
   },
 };
