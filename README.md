@@ -80,5 +80,8 @@ More information about the usage of this directory in [the documentation](https:
 
 - How to Nuxt.js + Typescript: https://typescript.nuxtjs.org/ja/
 - How to auth with JWT using nuxtjs/auth-next
+
   - https://zenn.dev/tanoken729/articles/73a3489dff27f4
     - https://www.digitalocean.com/community/tutorials/implementing-authentication-in-nuxtjs-app
+
+- Nuxt.js Lifecycles: https://qiita.com/too/items/e8ffcf7de7d48dcb9a9b#ssr%E3%83%A2%E3%83%BC%E3%83%89

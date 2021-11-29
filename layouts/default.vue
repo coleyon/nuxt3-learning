@@ -71,19 +71,24 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
+          icon: 'mdi-home',
           title: 'Home',
           to: '/',
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          icon: 'mdi-table',
+          title: 'Records',
+          to: '/records',
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Secondary',
-          to: '/secondary',
+          icon: 'mdi-logout',
+          title: 'Logout',
+          to: '/logout',
+        },
+        {
+          icon: 'mdi-information',
+          title: 'Info',
+          to: '/info',
         },
       ],
       miniVariant: false,

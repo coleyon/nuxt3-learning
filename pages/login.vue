@@ -2,7 +2,6 @@
   <v-row justify="center" align="center">
     <v-col class="text-center">
       <form @submit.prevent="submitLogin">
-        <h1>Login</h1>
         <label for="username" class="text-left">Username</label>
         <input v-model="user.username" id="username" type="text" />
         <label for="password" class="text-left">Password</label>
@@ -27,23 +26,23 @@ export default {
   },
 
   methods: {
-    /**
-     * Login
-     */
     async submitLogin() {
       console.debug('entire submitLogin()');
       // post the auth request to the backend api
       try {
-        // concreates request payloads as a url encodd form input.
+        // generate request payloads as a url encodd form input.
         const urlEncodedFormInput = new URLSearchParams();
         urlEncodedFormInput.append('username', this.user.username);
         urlEncodedFormInput.append('password', this.user.password);
+        // logging in
         await this.$auth.loginWith('local', {
           data: urlEncodedFormInput,
         });
+        // get account info
         const result = await this.$axios.get('/users/me');
         console.debug('Responsed token is:', result.data);
         await this.$auth.setUser(result.data.email);
+        // // example: how to logout
         // console.debug('loggedin? ', this.$auth.loggedIn);
         // console.debug('logging out.... ');
         // await this.$auth.logout();

@@ -71,7 +71,17 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-home',
+          title: 'Home',
+          to: '/',
+        },
+        {
+          icon: 'mdi-account',
+          title: 'Account',
+          to: '/account',
+        },
+        {
+          icon: 'mdi-login',
           title: 'Login',
           to: '/login',
         },

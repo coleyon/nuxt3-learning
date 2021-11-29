@@ -4,7 +4,7 @@
       <v-card class="logo py-4 d-flex justify-center">
         <v-card-text>
           <div class="mb-2">
-            <h1>SystemInfo</h1>
+            <h1>Account</h1>
           </div>
           <div>
             <ul>
@@ -33,7 +33,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  layout: 'login',
+};
 </script>
 
 <style scoped></style>
