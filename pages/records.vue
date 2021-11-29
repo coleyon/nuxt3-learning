@@ -1,9 +1,11 @@
 <template>
   <div>
+    <h2 mb="4">Grid Data</h2>
+
     <!-- Date Picker -->
     <FromToDatePicker />
 
-    <hr class="my-3" />
+    <hr class="my-4" />
 
     <!-- DataTable -->
     <div id="Records">
@@ -130,7 +132,7 @@ export default {
     getDesserts() {
       return [
         {
-          name: 'Frozen Yogurt',
+          name: 'フローズン ヨーグルト',
           calories: 159,
           fat: 6,
           carbs: 24,

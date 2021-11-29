@@ -1,10 +1,17 @@
 <template>
-  <div>
-    <!-- Date Picker -->
-    <div id="datePicker">
+  <!-- Date Picker -->
+  <div id="datePicker" class="mb-4">
+    <v-sheet
+      color="white"
+      elevation="1"
+      outlined
+      rounded
+      justify="center"
+      class="pl-4 pr-4 mt-2 pt-2"
+    >
       <v-row justify="center" align="center">
         <!-- startDate -->
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="4" sm="4" md="4">
           <v-menu
             ref="startDateMenu"
             v-model="startDateMenu"
@@ -46,7 +53,7 @@
           </v-menu>
         </v-col>
         <!-- endDate -->
-        <v-col cols="12" sm="6" md="4">
+        <v-col cols="4" sm="4" md="4">
           <v-menu
             ref="endDateMenu"
             v-model="endDateMenu"
@@ -90,7 +97,7 @@
 
         <v-spacer></v-spacer>
       </v-row>
-    </div>
+    </v-sheet>
   </div>
 </template>
 
@@ -103,11 +110,11 @@ export default {
       startDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      startDateMenu: false,
+      startDateMenu: '',
       endDate: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
-      endDateMenu: false,
+      endDateMenu: '',
     };
   },
 };
