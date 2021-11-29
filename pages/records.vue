@@ -1,26 +1,58 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col class="text-center">
-      <h1>Records</h1>
-      <v-data-table
-        :headers="headers"
-        :items="desserts"
-        :items-per-page="5"
-        class="elevation-1"
-      ></v-data-table>
-    </v-col>
-  </v-row>
+  <div>
+    <!-- Date Picker -->
+    <FromToDatePicker />
+
+    <hr class="my-3" />
+
+    <!-- DataTable -->
+    <div id="Records">
+      <v-row justify="center" align="center">
+        <v-col class="text-center">
+          <v-card-title>
+            Records
+            <v-spacer></v-spacer>
+            <v-text-field
+              @change="getDataFromApi"
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+            dense
+            :headers="headers"
+            :items="desserts"
+            :sort-by="['name']"
+            :sort-desc="[false, true]"
+            multi-sort
+            :items-per-page="5"
+            :options.sync="options"
+            :server-items-length="totalDesserts"
+            :loading="loading"
+            class="elevation-1"
+          ></v-data-table>
+        </v-col>
+      </v-row>
+    </div>
+  </div>
 </template>
 
 <script>
+import FromToDatePicker from '~/components/FromToDatePicker.vue';
 export default {
-  middleware: ['auth'],
-  // table datas
   data() {
     return {
+      search: '',
+      totalDesserts: 0,
+      desserts: [],
+      loading: true,
+      options: {},
       headers: [
         {
-          text: 'Dessert',
+          text: 'Dessert (100g serving)',
           align: 'start',
           sortable: false,
           value: 'name',
@@ -31,19 +63,84 @@ export default {
         { text: 'Protein (g)', value: 'protein' },
         { text: 'Iron (%)', value: 'iron' },
       ],
-      desserts: [
+    };
+  },
+  watch: {
+    options: {
+      handler() {
+        console.debug('getDataFromApi()');
+        this.getDataFromApi();
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    getDataFromApi() {
+      this.loading = true;
+      this.fakeApiCall().then((data) => {
+        this.desserts = data.items;
+        this.totalDesserts = data.total;
+        this.loading = false;
+      });
+    },
+    /**
+     * In a real application this would be a call to fetch() or axios.get()
+     */
+    fakeApiCall() {
+      return new Promise((resolve, reject) => {
+        const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+        let items = this.getDesserts();
+        // search
+        const query = this.search.trim().toLowerCase() || '';
+        if (query) {
+          items = items.filter((item) => {
+            return Object.values(item)
+              .join(',')
+              .toLocaleLowerCase()
+              .includes(query);
+          });
+        }
+        const total = items.length;
+        if (sortBy.length === 1 && sortDesc.length === 1) {
+          items = items.sort((a, b) => {
+            const sortA = a[sortBy[0]];
+            const sortB = b[sortBy[0]];
+            if (sortDesc[0]) {
+              if (sortA < sortB) return 1;
+              if (sortA > sortB) return -1;
+              return 0;
+            } else {
+              if (sortA < sortB) return -1;
+              if (sortA > sortB) return 1;
+              return 0;
+            }
+          });
+        }
+        if (itemsPerPage > 0) {
+          items = items.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+        }
+        setTimeout(() => {
+          resolve({
+            items,
+            total,
+          });
+        }, 300);
+      });
+    },
+    getDesserts() {
+      return [
         {
           name: 'Frozen Yogurt',
           calories: 159,
-          fat: 6.0,
+          fat: 6,
           carbs: 24,
-          protein: 4.0,
+          protein: 4,
           iron: '1%',
         },
         {
           name: 'Ice cream sandwich',
           calories: 237,
-          fat: 9.0,
+          fat: 9,
           carbs: 37,
           protein: 4.3,
           iron: '1%',
@@ -51,9 +148,9 @@ export default {
         {
           name: 'Eclair',
           calories: 262,
-          fat: 16.0,
+          fat: 16,
           carbs: 23,
-          protein: 6.0,
+          protein: 6,
           iron: '7%',
         },
         {
@@ -67,7 +164,7 @@ export default {
         {
           name: 'Gingerbread',
           calories: 356,
-          fat: 16.0,
+          fat: 16,
           carbs: 49,
           protein: 3.9,
           iron: '16%',
@@ -75,9 +172,9 @@ export default {
         {
           name: 'Jelly bean',
           calories: 375,
-          fat: 0.0,
+          fat: 0,
           carbs: 94,
-          protein: 0.0,
+          protein: 0,
           iron: '0%',
         },
         {
@@ -99,7 +196,7 @@ export default {
         {
           name: 'Donut',
           calories: 452,
-          fat: 25.0,
+          fat: 25,
           carbs: 51,
           protein: 4.9,
           iron: '22%',
@@ -107,15 +204,14 @@ export default {
         {
           name: 'KitKat',
           calories: 518,
-          fat: 26.0,
+          fat: 26,
           carbs: 65,
           protein: 7,
           iron: '6%',
         },
-      ],
-    };
+      ];
+    },
   },
+  components: { FromToDatePicker },
 };
 </script>
-
-<style scoped></style>

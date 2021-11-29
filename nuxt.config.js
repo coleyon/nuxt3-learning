@@ -6,7 +6,7 @@ export default {
     titleTemplate: '%s - pj',
     title: 'pj',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ja'
     },
     meta: [
       { charset: 'utf-8' },
@@ -52,7 +52,7 @@ export default {
     },
     localStorage: false,
 
-    // 認証ロジック
+    // Auth Logics
     strategies: {
       // JWT auth with the demostack backend.
       local: {
