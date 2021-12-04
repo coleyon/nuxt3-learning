@@ -25,6 +25,7 @@
           </v-card-title>
           <v-data-table
             dense
+            @sort="getDataFromApi"
             :headers="headers"
             :items="desserts"
             :sort-by="['name']"

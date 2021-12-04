@@ -44,6 +44,7 @@
     <v-main>
       <v-container>
         <Nuxt />
+        <FlashMessage :position="'right bottom'" />
       </v-container>
     </v-main>
     <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>

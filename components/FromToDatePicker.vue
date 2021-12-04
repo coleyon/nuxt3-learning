@@ -1,17 +1,10 @@
 <template>
   <!-- Date Picker -->
   <div id="datePicker" class="mb-4">
-    <v-sheet
-      color="white"
-      elevation="1"
-      outlined
-      rounded
-      justify="center"
-      class="pl-4 pr-4 mt-2 pt-2"
-    >
+    <v-sheet color="white" elevation="1" outlined rounded justify="center">
       <v-row justify="center" align="center">
         <!-- startDate -->
-        <v-col cols="4" sm="4" md="4">
+        <v-col>
           <v-menu
             ref="startDateMenu"
             v-model="startDateMenu"
@@ -53,7 +46,7 @@
           </v-menu>
         </v-col>
         <!-- endDate -->
-        <v-col cols="4" sm="4" md="4">
+        <v-col>
           <v-menu
             ref="endDateMenu"
             v-model="endDateMenu"

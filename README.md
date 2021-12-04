@@ -85,3 +85,11 @@ More information about the usage of this directory in [the documentation](https:
     - https://www.digitalocean.com/community/tutorials/implementing-authentication-in-nuxtjs-app
 
 - Nuxt.js Lifecycles: https://qiita.com/too/items/e8ffcf7de7d48dcb9a9b#ssr%E3%83%A2%E3%83%BC%E3%83%89
+
+```json
+{
+  "password": "P@ssw0rd",
+  "email": "test@test.com",
+  "full_name": "testuser"
+}
+```
